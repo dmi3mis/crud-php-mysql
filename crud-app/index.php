@@ -20,6 +20,16 @@
         <title>CRUD: CReate, Update, Delete PHP MySQL</title>
         <link rel="stylesheet" type="text/css" href="style.css">
 </head>
+
+<?php if (isset($_SESSION['hostname'])): ?>
+        <div class="title">
+                <?php 
+                        echo $_SESSION['hostname']; 
+                        unset($_SESSION['hostname']);
+                ?>
+        </div>
+<?php endif ?>
+
 <body>
         <form method="post" action="server.php" >
                 <input type="hidden" name="id" value="<?php echo $id; ?>">
@@ -54,6 +64,7 @@
         </div>
 <?php endif ?>
 </html>
+
 <?php $results = mysqli_query($db, "SELECT * FROM info"); ?>
 
 <table>

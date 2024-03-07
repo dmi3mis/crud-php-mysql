@@ -77,3 +77,13 @@ form {
     width: 50%;
     text-align: center;
 }
+.title {
+    margin: 30px auto; 
+    padding: 10px; 
+    border-radius: 5px; 
+    color: #b9ae32; 
+    background: #dff0d8; 
+    border: 1px solid #a61948;
+    width: 50%;
+    text-align: left;
+}

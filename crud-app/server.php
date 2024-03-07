@@ -22,7 +22,10 @@
                 PRIMARY KEY (id))";
         
         mysqli_query($db, $sql);
-
+        
+        $msg = 'hostname is: ' . getenv('HOSTNAME');
+        
+        $_SESSION['hostname'] =$msg;
         // initialize variables
 
         $name = "";
