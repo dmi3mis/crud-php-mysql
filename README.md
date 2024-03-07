@@ -9,11 +9,11 @@ What i need to do, to deploy this application?
 
 # Install this application in Docker containers locally
 
-## 1. Install Docker, Mysql client and create and prepare Mysql Database in container
+## 1. Install Docker, MySQL client. Create Mysql Database in container.
 
 ```console
 apt update
-apt install -y podman.io docker-buildx mysql-client-core-8.0 php-mysql
+apt install -y podman.io docker-buildx
 
 docker run --name mysql -e MYSQL_DATABASE=crud \
                         -e MYSQL_USER=user \
@@ -48,18 +48,23 @@ CRUD application get mysql server name, user name and password from variables
 ```console 
 docker buildx build --no-cache -t crud-app crud-app/
 docker image ls
-docker run -d --link mysql --name crud-app -p 8080:80 -e MYSQL_SERVER=mysql -e MYSQL_USER=user -e MYSQL_PASSWORD=userpass -e MYSQL_DATABASE=crud crud-app
+docker run -d --link mysql \
+              --name crud-app \
+              -p 8080:80 \
+              -e MYSQL_SERVER=mysql \
+              -e MYSQL_USER=user \
+              -e MYSQL_PASSWORD=userpass \
+              -e MYSQL_DATABASE=crud crud-app
 ```
 
-CRUD application will create sql table `info` on first launch.
+We do not need to create table `info` in MySQL database `crud`.
+Application will create all that it will need on first launch.
 
 ## 4 Access to application locally with Internet Browser
 
 ```
 firefox http://localhost:8080
 ```
-![]
-
 
 ## 5 To stop and delete all containers with all data 
 
@@ -70,3 +75,15 @@ docker volume rm sqldata
 ```
 
 # Install this application in with docker-compose
+
+```console
+apt update
+apt install -y podman.io docker-compose docker-buildx
+cd docker-compose
+docker-compose up -d
+```
+
+Now you cat test it with `firefox http://localhost:8080`
+
+# Deploy application to kubernetes cluster
+TODO:
