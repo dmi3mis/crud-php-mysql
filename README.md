@@ -4,6 +4,7 @@ Simple PHP CRUD application. Create, edit, update and delete posts with MySQL da
 > [PHP CRUD Create, edit, update and delete posts with MySQL database](https://codewithawa.com/posts/php-crud-create,-edit,-update-and-delete-posts-with-mysql-database)
 
 ![screenshot](img/crud-app.png)
+
 What i need to do, to deploy this application?
 
 # Install this application in Docker containers locally
@@ -68,9 +69,4 @@ docker rm `docker ps -a -q`
 docker volume rm sqldata
 ```
 
-# Start this application with docker-compose
-
-```console
-cd docker-compose
-docker-compose up -d
-```
+# Install this application in with docker-compose
