@@ -1,0 +1,30 @@
+services:
+  crud-app:
+    build:
+      context: ../crud-app
+    restart: always
+    ports:
+      - 8080:80
+    networks:
+      - backnet
+    environment:
+      - MYSQL_SERVER=db
+      - MYSQL_DATABASE=crud
+      - MYSQL_USER=user
+      - MYSQL_PASSWORD=userpass
+  db:
+    image: mysql
+    restart: always
+    environment:
+      - MYSQL_DATABASE=crud
+      - MYSQL_USER=user
+      - MYSQL_PASSWORD=userpass
+      - MYSQL_ROOT_PASSWORD=rootpass
+    volumes:
+      - db-data:/var/lib/mysql
+    networks:
+      - backnet
+networks:
+  backnet:
+volumes:
+  db-data:
