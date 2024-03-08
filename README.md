@@ -85,5 +85,39 @@ docker-compose up -d
 
 Now you cat test it with `firefox http://localhost:8080`
 
-# Deploy application to kubernetes cluster
-TODO:
+# Deploy application to kubernetes cluster with kubectl only commands
+
+
+```console
+kubectl create secret generic mysql --from-literal database=crud --from-literal user=user --from-literal password=pass --from-literal root-password=rootpass --from-literal server=mysql
+
+kubectl create service clusterip mysql --tcp=3306:3306
+
+kubectl create deployment mysql --image docker.io/library/mysql:latest --dry-run=client -o yaml > mysql-deployment.yaml
+kubectl set env deployment mysql --from secret/mysql --prefix MYSQL_
+
+kubectl create deployment crud-app --image dmi3mis/crud-app:latest
+kubectl set env deployment crud-app --from secret/mysql --prefix MYSQL_
+kubectl scale deployment crud-app --replicas 4
+
+kubectl port-forward  service/crud-app 8080:80
+
+firefox http://localhost:8080
+```
+
+# Deploy application tyo kubernetes with yaml manifests and kustomize
+
+```console
+git clone https://giuthub.com/dmi3mis/crud-php-mysql/
+
+cd crud-php-mysql
+cd Kubernetes/crud-app/overlay/dev
+
+kubectl apply -k .
+kubectl get all --namespace dev
+
+cd ../prod
+
+kubectl apply -k .
+kubectl get all --namespace dev
+```

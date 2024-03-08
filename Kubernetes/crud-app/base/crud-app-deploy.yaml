@@ -1,0 +1,45 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  creationTimestamp: null
+  labels:
+    app: crud-app
+  name: crud-app
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app: crud-app
+  template:
+    metadata:
+      creationTimestamp: null
+      labels:
+        app: crud-app
+    spec:
+      containers:
+      - image: dmi3mis/crud-app:latest
+        name: crud-app
+        imagePullPolicy: Always
+        env:
+        - name: MYSQL_SERVER
+          valueFrom:
+            secretKeyRef:
+              key: server
+              name: mysql
+        - name: MYSQL_USER
+          valueFrom:
+            secretKeyRef:
+              key: user
+              name: mysql
+        - name: MYSQL_DATABASE
+          valueFrom:
+            secretKeyRef:
+              key: database
+              name: mysql
+        - name: MYSQL_PASSWORD
+          valueFrom:
+            secretKeyRef:
+              key: password
+              name: mysql
+        resources: {}
+status: {}

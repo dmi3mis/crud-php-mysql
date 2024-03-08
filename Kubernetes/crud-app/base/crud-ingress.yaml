@@ -1,0 +1,16 @@
+apiVersion: networking.k8s.io/v1
+kind: Ingress
+metadata:
+  name: crud-ingress
+spec:
+  rules:
+  - host: "crud.company.com"
+    http:
+      paths:
+      - pathType: Prefix
+        path: "/"
+        backend:
+          service:
+            name: crud-app
+            port:
+              number: 8080

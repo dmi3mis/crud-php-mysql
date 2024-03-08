@@ -1,0 +1,24 @@
+apiVersion: kustomize.config.k8s.io/v1beta1
+kind: Kustomization
+
+bases:
+- ../../base
+namespace: prod
+commonLabels:
+  environment: prod
+  sre-team: red
+
+patchesStrategicMerge:
+- namespace.yaml
+- crud-replicas.yaml
+- crud-ingress.yaml
+
+secretGenerator:
+- name: mysql
+  type: Opaque
+  literals:
+    - database: crud
+    - user: produser
+    - password: prodpass
+    - root-password: produserpass
+    - server: mysql
