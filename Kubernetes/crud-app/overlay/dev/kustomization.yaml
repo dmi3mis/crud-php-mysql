@@ -17,8 +17,8 @@ secretGenerator:
 - name: mysql
   type: Opaque
   literals:
-    - database: crud-dev
-    - user: devuser
-    - password: devpass
-    - root-password: devrootpass
-    - server: mysql
+  - database=crud-dev
+  - user=devuser
+  - password=devpass
+  - root-password=devrootpass
+  - server=mysql
