@@ -1,9 +1,12 @@
 apiVersion: kustomize.config.k8s.io/v1beta1
 kind: Kustomization
+namespace: dev
+bases:
+- ../../base
 
 resources:
-- ../../base
-namespace: dev
+  - namespace.yaml
+
 commonLabels:
   environment: dev
   sre-team: green
@@ -11,7 +14,6 @@ commonLabels:
 patchesStrategicMerge:
   - crud-app-replicas.yaml
   - crud-ingress.yaml
-
 
 generatorOptions:
   disableNameSuffixHash: true
