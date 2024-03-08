@@ -5,3 +5,12 @@ metadata:
 spec:
   rules:
   - host: "crud-dev.company.com"
+    http:
+      paths:
+      - pathType: Prefix
+        path: "/"
+        backend:
+          service:
+            name: crud-app
+            port:
+              number: 8080
