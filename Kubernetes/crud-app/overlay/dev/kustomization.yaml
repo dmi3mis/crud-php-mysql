@@ -13,6 +13,11 @@ patchesStrategicMerge:
   - crud-app-replicas.yaml
   - crud-ingress.yaml
 
+
+generatorOptions:
+  disableNameSuffixHash: true
+
+
 secretGenerator:
 - name: mysql
   type: Opaque

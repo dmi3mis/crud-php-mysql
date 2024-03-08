@@ -19,7 +19,7 @@ spec:
       containers:
       - image: mysql:latest
         name: mysql
-      - env:
+        env:
         - name: MYSQL_ROOT_PASSWORD
           valueFrom:
             secretKeyRef:
