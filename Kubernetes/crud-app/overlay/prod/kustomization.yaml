@@ -9,7 +9,6 @@ commonLabels:
   sre-team: red
 
 patchesStrategicMerge:
-- namespace.yaml
 - crud-replicas.yaml
 - crud-ingress.yaml
 
@@ -21,6 +20,7 @@ generatorOptions:
 secretGenerator:
 - name: mysql
   type: Opaque
+  behavior: replace
   literals:
   - database=crud
   - user=produser
