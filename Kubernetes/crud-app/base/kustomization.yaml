@@ -3,7 +3,7 @@ kind: Kustomization
 commonLabels:
   app: crud-app
 resources:
-  - crud-secret.yaml
+  - mysql-secret.yaml
   - mysql-deploy.yaml
   - mysql-service.yaml
   - crud-service.yaml

@@ -8,7 +8,7 @@ commonLabels:
   environment: prod
   sre-team: red
 
-patches:
+patchesStrategicMerge:
 - namespace.yaml
 - crud-replicas.yaml
 - crud-ingress.yaml

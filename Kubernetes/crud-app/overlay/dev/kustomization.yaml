@@ -8,10 +8,10 @@ commonLabels:
   environment: dev
   sre-team: green
 
-patches:
-- namespace.yaml
-- crud-replicas.yaml
-- crud-ingress.yaml
+patchesStrategicMerge:
+  - namespace.yaml
+  - crud-app-replicas.yaml
+  - crud-ingress.yaml
 
 secretGenerator:
 - name: mysql
