@@ -108,7 +108,7 @@ firefox http://localhost:8080
 # Deploy application tyo kubernetes with yaml manifests and kustomize
 
 ```console
-git clone https://giuthub.com/dmi3mis/crud-php-mysql/
+git clone https://github.com/dmi3mis/crud-php-mysql/
 
 cd crud-php-mysql
 cd Kubernetes/crud-app/overlay/dev
