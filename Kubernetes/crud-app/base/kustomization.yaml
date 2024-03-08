@@ -3,10 +3,13 @@ kind: Kustomization
 commonLabels:
   app: crud-app
 resources:
+  - crud-secret.yaml
   - mysql-deploy.yaml
+  - mysql-service.yaml
+  - crud-service.yaml
   - crud-app-deploy.yaml
   - crud-ingress.yaml
-  - crud-service.yaml
+
 secretGenerator:
 - name: mysql
   type: Opaque
