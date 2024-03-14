@@ -6,25 +6,47 @@ services:
     ports:
       - 8080:80
     networks:
-      - backnet
+      - db-net
     environment:
       - MYSQL_SERVER=db
       - MYSQL_DATABASE=crud
       - MYSQL_USER=user
-      - MYSQL_PASSWORD=userpass
+      - MYSQL_PASSWORD=/run/secrets/db-user-password
+    secrets:
+      - db-user-password
+    depends_on:
+      db:
+        condition: service_healthy
   db:
     image: mysql
     restart: always
     environment:
       - MYSQL_DATABASE=crud
       - MYSQL_USER=user
-      - MYSQL_PASSWORD=userpass
-      - MYSQL_ROOT_PASSWORD=rootpass
+      - MYSQL_PASSWORD=/run/secrets/db-user-password
+      - MYSQL_ROOT_PASSWORD=/run/secrets/db-root-password
     volumes:
       - db-data:/var/lib/mysql
     networks:
-      - backnet
+      - db-net
+    healthcheck:
+      test: ["CMD", "mysqladmin", "ping", "-h", "127.0.0.1", "--silent"]
+      interval: 3s
+      retries: 5
+      start_period: 10s
+    secrets:
+      - db-root-password
+      - db-user-password
+    expose:
+      - 3306
+      - 33060
+secrets:
+  db-root-password:
+    file: db/db-root-password.txt
+  db-user-password:
+    file: db/db-user-password.txt
+
 networks:
-  backnet:
+  db-net: {}
 volumes:
-  db-data:
+  db-data: {}

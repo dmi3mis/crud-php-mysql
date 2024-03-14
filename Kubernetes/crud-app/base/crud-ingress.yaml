@@ -4,7 +4,7 @@ metadata:
   name: crud-ingress
 spec:
   rules:
-  - host: "crud.company.com"
+  - host: "crud.domain.tld"
     http:
       paths:
       - pathType: Prefix
