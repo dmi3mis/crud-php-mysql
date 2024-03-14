@@ -17,4 +17,4 @@ spec:
   tls:
   - hosts:
     - crud-dev.apps.dmi3lab.online
-    secretName: crud-apps-cert
+    secretName: crud-app-cert
