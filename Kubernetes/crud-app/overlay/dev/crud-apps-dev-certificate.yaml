@@ -11,3 +11,4 @@ spec:
     name: clusterissuer
   dnsNames:
   - "crud-dev.apps.dmi3lab.online"
+  - "crud-dev1.apps.dmi3lab.online"
