@@ -5,7 +5,7 @@ namespace: dev
 resources:
 - ../../base
 - namespace.yaml
-
+- crud-apps-dev-certificate.yaml
 commonLabels:
   environment: dev
   sre-team: green
