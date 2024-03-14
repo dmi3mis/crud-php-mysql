@@ -29,12 +29,6 @@ secretGenerator:
   - server=mysql
   name: mysql
   type: Opaque
-configMapGenerator:
-- literals:
-  - k=v
-  name: NAME
-  options:
-    disableNameSuffixHash: true
 labels:
 - includeSelectors: true
   pairs:
