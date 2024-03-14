@@ -6,9 +6,6 @@ resources:
 - ../../base
 - namespace.yaml
 - crud-apps-dev-certificate.yaml
-commonLabels:
-  environment: dev
-  sre-team: green
 
 patches:
 - path: crud-app-replicas.yaml
@@ -23,12 +20,23 @@ generatorOptions:
 
 
 secretGenerator:
-- name: mysql
-  type: Opaque
-  behavior: replace
+- behavior: replace
   literals:
   - database=crud-dev
   - user=devuser
   - password=devpass
   - root-password=devrootpass
   - server=mysql
+  name: mysql
+  type: Opaque
+configMapGenerator:
+- literals:
+  - k=v
+  name: NAME
+  options:
+    disableNameSuffixHash: true
+labels:
+- includeSelectors: true
+  pairs:
+    environment: dev
+    sre-team: green
