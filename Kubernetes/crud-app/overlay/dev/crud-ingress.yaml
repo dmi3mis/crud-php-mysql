@@ -5,6 +5,15 @@ metadata:
 spec:
   rules:
   - host: "crud-dev.apps.dmi3lab.online"
+    http:
+      paths:
+      - pathType: Prefix
+        path: "/"
+        backend:
+          service:
+            name: crud-app
+            port:
+              number: 8080
   tls:
   - hosts:
     - crud-dev.apps.dmi3lab.online
