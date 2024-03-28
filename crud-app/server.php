@@ -23,7 +23,7 @@
         
         mysqli_query($db, $sql);
         
-        $msg = 'hostname is: ' . getenv('HOSTNAME');
+        $msg = 'Update 28.03.2024 hostname is: ' . getenv('HOSTNAME');
         
         $_SESSION['hostname'] =$msg;
         // initialize variables
