@@ -35,11 +35,11 @@ spec:
         - name: pathToContext
           value: ./crud-app
         - name: image-reference
-          value: limarktest/tekton-nodejs
+          value: dmi3mis/crud-app
         - name: image-tag
           value: "$(tt.params.gitrevision)"
         - name: manifest-repo
           value: git@github.com:dmi3mis/crud-yaml.git
         - name: manifest-path
-          value: tekton-node-app/overlays/*
+          value: crud-app/overlays/*
         serviceAccountName: git-serviceaccount
