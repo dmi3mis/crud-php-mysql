@@ -32,6 +32,8 @@ spec:
         params:
         - name: repo-url
           value: git@github.com:dmi3mis/crud-php-mysql.git
+        - name: pathToContext
+          value: ./crud-app
         - name: image-reference
           value: limarktest/tekton-nodejs
         - name: image-tag
