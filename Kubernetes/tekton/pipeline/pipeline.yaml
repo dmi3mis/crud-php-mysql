@@ -58,6 +58,8 @@ spec:
       value: $(params.manifest-repo)
     - name: deleteExisting
       value: "true"
+    - name: revision
+      value: main
   - name: list-source
     runAfter: ["fetch-manifest"]
     taskRef:

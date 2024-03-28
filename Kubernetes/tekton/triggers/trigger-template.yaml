@@ -28,7 +28,7 @@ spec:
                   storage: 1Gi
         - name: docker-credentials
           secret:
-            secretName: docker-credential
+            secretName: docker-credentials
         params:
         - name: repo-url
           value: git@github.com:dmi3mis/crud-php-mysql.git
