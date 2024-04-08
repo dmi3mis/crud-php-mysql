@@ -13,7 +13,7 @@ What i need to do, to deploy this application?
 
 ```console
 apt update
-apt install -y podman.io docker-buildx
+apt install -y docker.io docker-buildx
 
 docker run --name mysql -e MYSQL_DATABASE=crud \
                         -e MYSQL_USER=user \
