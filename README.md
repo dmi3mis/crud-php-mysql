@@ -89,11 +89,19 @@ Now you cat test it with `firefox http://localhost:8080`
 
 
 ```console
-kubectl create secret generic mysql --from-literal database=crud --from-literal user=user --from-literal password=pass --from-literal root-password=rootpass --from-literal server=mysql
+kubectl create secret generic mysql \
+         --from-literal database=crud \
+         --from-literal user=user \
+         --from-literal password=pass \
+         --from-literal root-password=rootpass \
+         --from-literal server=mysql
 
 kubectl create service clusterip mysql --tcp=3306:3306
 
-kubectl create deployment mysql --image docker.io/library/mysql:latest --dry-run=client -o yaml > mysql-deployment.yaml
+kubectl create deployment mysql \
+         --image docker.io/library/mysql:latest \ 
+         --dry-run=client -o yaml
+
 kubectl set env deployment mysql --from secret/mysql --prefix MYSQL_
 
 kubectl create deployment crud-app --image dmi3mis/crud-app:latest
@@ -105,7 +113,7 @@ kubectl port-forward  service/crud-app 8080:80
 firefox http://localhost:8080
 ```
 
-# Deploy application tyo kubernetes with yaml manifests and kustomize
+# Deploy application in `kubernetes` with yaml manifests and kustomize
 
 ```console
 git clone https://github.com/dmi3mis/crud-php-mysql/
