@@ -23,7 +23,7 @@
         
         mysqli_query($db, $sql);
         
-        $msg = 'Update v1 hostname is: ' . getenv('HOSTNAME');
+        $msg = 'Update v2 hostname is: ' . getenv('HOSTNAME');
         
         $_SESSION['hostname'] =$msg;
         // initialize variables
