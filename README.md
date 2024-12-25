@@ -104,6 +104,7 @@ kubectl create deployment mysql \
 
 kubectl set env deployment mysql --from secret/mysql --prefix MYSQL_
 
+kubectl create service clusterip crud-app --tcp=80:80
 kubectl create deployment crud-app --image dmi3mis/crud-app:latest
 kubectl set env deployment crud-app --from secret/mysql --prefix MYSQL_
 kubectl scale deployment crud-app --replicas 4
