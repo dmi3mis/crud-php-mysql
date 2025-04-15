@@ -99,8 +99,7 @@ kubectl create secret generic mysql \
 kubectl create service clusterip mysql --tcp=3306:3306
 
 kubectl create deployment mysql \
-         --image docker.io/library/mysql:latest \
-         --dry-run=client -o yaml
+         --image docker.io/library/mysql:latest
 
 kubectl set env deployment mysql --from secret/mysql --prefix MYSQL_
 
