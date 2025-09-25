@@ -1,59 +1,62 @@
-<?php
+<?php 
+        session_start();
 
-session_start();
-
-// Проверяем, установлен ли CSRF токен в сессии
-if (!isset($_SESSION['csrf_token'])) {
-    // Если нет, создаем новый и сохраняем в сессии
-    $_SESSION['csrf_token'] = bin2hex(random_bytes(32));
-}
-
-// Подключение к базе данных
-$servername = getenv('MYSQL_SERVER');
-$db_user = getenv('MYSQL_USER');
-$db_pass = getenv('MYSQL_PASSWORD');
-$db_name = getenv('MYSQL_DATABASE');
-
-mysqli_report(MYSQLI_REPORT_ERROR | MYSQLI_REPORT_STRICT);
-
-try {
-    $db = mysqli_connect($servername, $db_user, $db_pass, $db_name);
-    if ($db === false) {
-        die("ERROR: Could not connect. " . mysqli_connect_error());
-    }
-    
-    // Обработка POST запросов с проверкой CSRF
-    if ($_SERVER['REQUEST_METHOD'] === 'POST') {
-        // Проверяем наличие CSRF токена в запросе
-        if (!isset($_POST['csrf_token'])) {
-            $_SESSION['message'] = "Security error: CSRF token missing";
-            header('Location: index.php');
-            exit();
-        }
+        $servername = getenv('MYSQL_SERVER');
+        $db_user = getenv('MYSQL_USER');
+        $db_pass = getenv('MYSQL_PASSWORD');
+        $db_name = getenv('MYSQL_DATABASE');
         
-        // Проверяем соответствие CSRF токена
-        if (!isset($_SESSION['csrf_token']) || $_POST['csrf_token'] !== $_SESSION['csrf_token']) {
-            $_SESSION['message'] = "Security error: CSRF token validation failed";
-            header('Location: index.php');
-            exit();
-        }
+        mysqli_report(MYSQLI_REPORT_ERROR);
+
+        $db = mysqli_connect( $servername , $db_user, $db_pass , $db_name );
         
-        // Остальной код обработки POST...
-        // [остальная часть кода без изменений]
-    }
-    
-    // Обработка GET запросов (удаление)
-    if (isset($_GET['del'])) {
-        // Код обработки удаления...
-        // [остальная часть кода без изменений]
-    }
+        if($db === false){
+                die("ERROR: Could not connect. " . mysqli_connect_error());
+            }
 
-} catch (Exception $e) {
-    // Обработка ошибок...
-    // [остальная часть кода без изменений]
-}
+        
+        // initialize database
+        $sql = "CREATE TABLE IF NOT EXISTS info ( id int(11) NOT NULL AUTO_INCREMENT,
+                name varchar(100) DEFAULT NULL,
+                address varchar(100) DEFAULT NULL,
+                PRIMARY KEY (id))";
+        
+        mysqli_query($db, $sql);
+        
+        $msg = 'Update v1 hostname is: ' . getenv('HOSTNAME');
+        
+        $_SESSION['hostname'] =$msg;
+        // initialize variables
 
-// Если кто-то попытается напрямую открыть process.php
-header('Location: index.php');
-exit();
+        $name = "";
+        $address = "";
+        $id = 0;
+        $update = false;
+
+        if (isset($_POST['save'])) {
+                $name = $_POST['name'];
+                $address = $_POST['address'];
+
+                mysqli_query($db, "INSERT INTO info (name, address) VALUES ('$name', '$address')"); 
+                $_SESSION['message'] = "Address saved"; 
+                header('location: index.php');
+        }
+        if (isset($_POST['update'])) {
+                $id = $_POST['id'];
+                $name = $_POST['name'];
+                $address = $_POST['address'];
+        
+                mysqli_query($db, "UPDATE info SET name='$name', address='$address' WHERE id=$id");
+                $_SESSION['message'] = "Address updated!"; 
+                header('location: index.php');
+        }
+        if (isset($_GET['del'])) {
+                $id = $_GET['del'];
+                mysqli_query($db, "DELETE FROM info WHERE id=$id");
+                $_SESSION['message'] = "Address deleted!"; 
+                header('location: index.php');
+        }
+
+
+// ...
 ?>
