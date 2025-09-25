@@ -113,6 +113,12 @@ kubectl port-forward  service/crud-app 8080:80
 firefox http://localhost:8080
 ```
 
+You can publish application with ingress resource.
+
+```console
+kubectl create ingress crud-ingress --rule=crud-app.apps.domain.tld/*=crud-app:80,tls=crud-ingress-tls-secret --annotation="cert-manager.io/issuer=crud-app-issuer" --annotation="kubernetes.io/tls-acme=true"
+```
+
 # Deploy application in `kubernetes` with yaml manifests and kustomize
 
 ```console
